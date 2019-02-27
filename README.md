@@ -1,1 +1,1 @@
-twoje imię_i_nazwisko
+Artur Jałocha
