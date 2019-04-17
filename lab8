@@ -1,0 +1,72 @@
+import scala.collection.Seq
+
+object nazwa6 {
+
+  def subseq[A](seq: Seq[A], begIdx: Int, endIdx: Int): Seq[A] = {
+    seq.drop(begIdx-1).take(endIdx-begIdx+1)
+  }
+
+  def countChars(str: String): Int = {
+    val alphabet = Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
+    var i =0
+    var str3=str
+    while(str3.nonEmpty) {
+      print(alphabet(i))
+      print(" = ")
+      print(str3.count(_ == alphabet(i)))
+      print(" ")
+      str3 = str3.filter(_ != alphabet(i))
+      i=i+1
+    }
+     0
+  }
+  def sum(seq: Seq[Option[Double]]): Double = {
+seq.flatten.sum
+  }
+
+  def position[A](seq: Seq[A], el: A): Option[Int] = {
+    if (seq.find(_ == el).isEmpty) None
+    else Some(seq.indexOf(el))
+  }
+
+  def indices[A](seq: Seq[A], el: A): Set[Int] = {
+    def indices2[A](seq: Seq[A], el: A, n: Int,l:Int): Set[Int] = {
+      if (seq.find(_ == el).isEmpty) Set()
+      else Set(seq.indexOf(el)+l)++indices2(seq.tail,el,seq.indexOf(el)+l,l+1)
+    }
+    indices2(seq,el,0,0)
+  }
+
+  def swap[A](seq: Seq[A]): Seq[A] = {
+    if(seq.isEmpty){
+        Seq()
+      }
+    else if(seq.tail.isEmpty){
+      Seq(seq.head)
+    }
+    else{
+      Seq(seq.tail.head)++Seq(seq.head)++swap(seq.tail.tail)
+    }
+  }
+
+
+  def main(args: Array[String]): Unit = {
+    val seq1: Seq[Int] = Seq(1,3,5)
+    val seq2: Seq[Int] = Seq(1, 3, 5, 6, 7)
+    val seq5: Seq[Int] = Seq(1, 1, 3, 3, 3, 5, 6, 7)
+    val seq3: Seq[Int] = Seq(2, 3, 4)
+    val seq4 = Seq(Some(5.4), Some(-2.0), Some(1.0), None, Some(2.6))
+
+    println(subseq(seq2,1,5))
+    println(subseq(seq2,3,4))
+    countChars("kochajmysiejakbracialiczmysiejakzydzi")
+    println(sum(seq4))
+    println(position(seq2,5))
+    println(position(seq2,2))
+    println(indices(seq5,3))
+    println(indices(seq5,1))
+      println(indices(seq5,2))
+    println(swap(seq5))
+
+  }
+}
